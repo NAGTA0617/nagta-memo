@@ -4,9 +4,17 @@
 
 <mapper namespace="net.softsociety.exam.dao.MemberDAO">
 
+<!-- 회원 중복체크 -->
+<select id="check" parameterType="Map" resultType="int">
+	select
+		count(memberid)
+	from market_member 
+	where memberid = #{memberid}
+</select>
 <!-- 회원정보 저장 -->
-<insert id="insertMember" parameterType="Member">
-
+<insert id="join" parameterType="Map">
+insert into market_member (memberid, memberpw, membername, phone) 
+values (#{memberid}, #{memberpw}, #{membername},#{phone}) 
 </insert>
 
 </mapper>

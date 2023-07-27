@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+<meta charset="UTF-8">
+<title>회원가입</title>
+<script th:src="@{/js/jquery-3.7.0.js}"></script>
+
+<script>
+$(document).ready(function() {
+	$('#formBt1').click(formSubmit);
+	$('#formBt2').click(reWrite);
+	
+});
+
+function formSubmit(){
+	let id = $('#id').val();
+	let pw = $('#pw').val();
+	let na = $('#name').val();
+	let ph = $('#phone').val();
+	if(id.length > 10 || id.length < 3){
+		alert('ID는 3~10자로 입력하세요')
+		return;
+	}else if(pw.length > 10 || pw.length < 3){
+		alert('비밀번호는 3~10자로 입력하세요')
+	}else if(na.length == 0){
+		alert('이름을 입력하세요')
+	}else(ph.length == 0){
+		alert('전화번호를 입력하세요')
+	}
+	$.ajax({
+		url: 'insert',
+		type: 'post',
+		data: {id: id, pw: pw, name: na, phone: ph},
+		success: function(){
+			$('#id').val('');
+			$('#pw').val('');
+			$('#na').val('');
+			$('#ph').val('');
+			alert('저장완료');
+		},
+		error: function(){
+			alert('실패');
+		}
+	});
+}
+</script>
+</head>
+<body>
+	<h1>[ 회원가입 ]</h1>
+	
+	<form id="joinForm">
+		ID <input type="text" id="id" name="id">
+		비밀번호 <input type="password" id="pw" name="password">
+		이름 <input type="text" id="na" name="name">
+		전화번호 <input type="text" id="ph" name="phone">
+		<input type="button" id="formBt1" value="가입">
+		<input type="button" id="formBt2" value="다시 쓰기">
+	</form>
+</body>
+</html>

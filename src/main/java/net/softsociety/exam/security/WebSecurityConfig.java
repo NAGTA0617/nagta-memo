@@ -26,9 +26,13 @@ public class WebSecurityConfig {
         .authorizeRequests()
         .antMatchers(
         		"/",
+        		"/member/login",
+        		"/member/loginForm",
+        		"/member/join",
                 "/image/**",
                 "/css/**",
                 "/js/**").permitAll()
+        .antMatchers("/user").hasRole("USER")
         .anyRequest().authenticated()
         .and()
         .formLogin()					

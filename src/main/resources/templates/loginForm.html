@@ -1,8 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<script th:src="@{/js/jquery-3.7.0.js}"></script>
+
+<script>
+$(document).ready(function() {
+	
+	
+});
+</script>
 <style>
 
 </style>
@@ -10,8 +20,10 @@
 <body>
 	<h1>[ 로그인 ]</h1>
 	
-		<form>
-
+		<form th:action="@{/member/login}" method="post">
+			ID<input type="text"><br>
+			PW<input type="password"><br>
+			<input type="submit" value="login">
 		</form>
 </body>
 </html>

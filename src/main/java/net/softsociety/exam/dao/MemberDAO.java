@@ -1,5 +1,7 @@
 package net.softsociety.exam.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import net.softsociety.exam.domain.Member;
@@ -9,5 +11,8 @@ import net.softsociety.exam.domain.Member;
  */
 @Mapper
 public interface MemberDAO {
-
+	
+	public void join(Map<String, String> request);
+	
+	public int check(Map<String, String> request);
 }
