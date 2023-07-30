@@ -11,13 +11,40 @@
 		let na = $("#membername").val();
 		let ph = $("#phone").val();
 		
+		if(id.length < 3 || id.length > 10 ){
+			alert("3~10 자");
+			$("#memberid").val("");
+			return;
+		}
+		if(pw.length < 3 || pw.length > 10){
+			alert("3~10 자");
+			$("#memberpw").val("");
+			return;
+		}
+		//null일경우가 있을까?
+		if(na == null || na == ""){
+			alert("이름입력해");
+			return;
+		}
+		if(ph == null || ph == ""){
+			alert("번호입력해");
+			return;
+		}
+
 		$.ajax({
 			url:'join',
 			data: {memberid: id, memberpw: pw, membername: na, phone: ph},
 			dataType: 'json',
 			type:'post',
 			success:function(result){
+				console.log("result : " + result);
+				console.log("result : " + JSON.stringify(result));
 				alert(result.msg);
+				
+				if(result.result == "Y"){
+					$("form").submit();
+					
+				}
 				
 				console.log(result);
 				
@@ -27,12 +54,16 @@
 			}
 		});
 	}
+	
+	function clearForm(){
+		location.reload();		//새로고침 개간단
+	}
 </script>
 </head>
 <body>
 <h1> [ 회원가입 ] </h1>
 	
-	<form th:action="@{/member/join}" method="post">
+	<form th:action="@{/}" method="get">
 	<table>
 		<tr> 
 			<td>ID</td>
@@ -53,7 +84,7 @@
 			<td><input type="text" name="phone" id="phone" placeholder="전화번호 입력"></td>
 		</tr>
 		<tr>
-			<td><input type="button" value="가입" onClick="check()"></td>
+			<td><input type="button" value="가입" onclick="check()"></td>
 			<td colspan="2"><input type="button" value="다시쓰기" onclick="clearForm()"></td>
 		</tr>
 	</table>

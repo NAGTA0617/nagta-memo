@@ -22,6 +22,7 @@ import net.softsociety.exam.service.MemberService;
 @RequestMapping("member")
 @Controller
 public class MemberController {
+	//private static PasswordEncoder passwordEncoder;
 	@Autowired
 	MemberService service;
 //회원가입창
@@ -41,12 +42,17 @@ public class MemberController {
 			
 			return resultMap;
 		}
+		//log.debug("{}", request);
+		//passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+		//String pw_encode = passwordEncoder.encode(request.get("memberpw"));
+		
+		//request.put("memberpw", pw_encode);
 		
 		service.join(request);
 		resultMap.put("result", "Y");
 		resultMap.put("msg", "사용가능");
 		
-		log.debug("{}", c);
+		//log.debug("{}", c);
 		return resultMap;
 	}
 	
@@ -54,10 +60,11 @@ public class MemberController {
 	public String loginForm() {
 		return "loginForm";
 	}
+
 	@PostMapping("login")
-	public String login() {
-		return "redirect:/";
+	public String login(){
+		
+		return "login";
 	}
-	
 
 }
